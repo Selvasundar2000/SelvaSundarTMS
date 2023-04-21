@@ -1,0 +1,227 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <title></title>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="text-center mt-3 mb-3"><%= title %></h1>
+            
+            <% if(action == 'add') { %>
+
+            <div class="card">
+                <div class="card-header">Salary</div>
+                <div class="card-body">
+                    <form method="POST" action="/a_salary/add_a_salary">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Reg. No.</label>
+                                    <input type="text" name="regid" id="regid" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Staff Name</label>
+                                    <input type="text" name="nme" id="nme" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Year</label>
+                                    <select name="year" class="form-control">
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                </div>
+                            
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Basic pay</label>
+                                        <input type="text" name="bpay" id="bpay" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label>Deduction</label>
+                                            <input type="text" name="deduct" id="deduct" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label>Total</label>
+                                            <input type="text" name="total" id="total" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                        
+                        <div class="mb-3">
+                            <input type="submit" name="submit_button" class="btn btn-primary" value="Add" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <% } else if(action == 'edit') { %>
+            <div class="card">
+                <div class="card-header">Salary</div>
+                <div class="card-body">
+                    <form method="POST" action="/a_salary/edit/<%= sampleData.id %>">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Reg. No.</label>
+                                    <input type="text" name="regid" id="regid" class="form-control" value="<%= sampleData.regid %>" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Staff Name</label>
+                                    <input type="text" name="nme" id="nme" class="form-control" value="<%= sampleData.nme %>" />
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Year</label>
+                                    <select name="year" class="form-control">
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                </div>
+                            
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>bpay</label>
+                                        <input type="text" name="bpay" id="bpay" class="form-control" value="<%= sampleData.bpay %>" />
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label>Deduction</label>
+                                            <input type="text" name="deduct" id="deduct" class="form-control" value="<%= sampleData.deduct %>"  />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label>Total</label>
+                                            <input type="text" name="total" id="total" class="form-control" value="<%= sampleData.total %>"  />
+                                        </div>
+                                    </div>
+                                </div>
+
+                        <div class="mb-3">
+                            <input type="submit" name="submit_button" class="btn btn-primary" value="Edit" />
+                        </div>
+                    </form>
+                    <script>
+                    document.getElementById('year').value="<%= sampleData.year %>";
+                    </script>
+                </div>
+            </div>
+            <% } else { %>
+                <% if(message.length > 0) { %>
+                <div class="alert alert-success">
+                    <%= message %>
+                </div>
+                <% } %>
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">Salary</div>
+                        <div class="col">
+                            <a href="/a_salary/add" class="btn btn-success btn-sm float-end">Add</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Reg.No.</th>
+                                
+                                <th>Name</th>
+                                <th>Year</th>
+                                <th>Basic pay</th>
+                                <th>Deduction</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                            <%
+                            if(sampleData.length > 0)
+                            {
+                                sampleData.forEach(function(data){
+                            %>
+                            <tr>
+                                <td><%= data.regid %></td>
+                                
+                                <td><%= data.nme %></td>
+                                <td><%= data.year %></td>
+                                <td><%= data.bpay %></td>
+                                <td><%= data.deduct %></td>
+                                <td><%= data.total %></td>
+                                
+                                <td>
+                                    <a href="/a_int/edit/<%= data.id %>" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="/a_int/delete/<%= data.id %>" class="btn btn-danger btn-sm">Delete</a>
+                                    </td>
+                            </tr>
+                            <%
+                                });
+                            }
+                            else
+                            {
+                            %>
+                            <tr>
+                                <td colspan="5">No Data Found</td>
+                            </tr>
+                            <%
+                            }
+                            %>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <% } %>
+
+        </div> 
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>
